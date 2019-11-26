@@ -1,0 +1,8 @@
+{
+  "realm": "spring-security-adapter-test",
+  "bearer-only": true,
+  "auth-server-url": "http://localhost:8180/auth",
+  "ssl-required": "external",
+  "resource": "database-client",
+  "use-resource-role-mappings": true
+}
