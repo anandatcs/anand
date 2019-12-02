@@ -5,10 +5,13 @@
   [style]="{ overflow: 'visible' }"
   scrollHeight="350px"
   (onRowSelect)="onRowSelect($event)"
+  (onRowUnselect)="onRowUnselect($event)"
   [paginator]="true"
   [rows]="10"
+  editMode="row"
+  selectionMode="single"
 >
-  <ng-template pTemplate="header" let-columns>
+  <ng-template pTemplate="header" let-columns >
     <tr>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
         {{ col.header }}<p-sortIcon [field]="col.field"></p-sortIcon>
@@ -73,17 +76,23 @@
     <tr [pSelectableRow]="rowData">
 
       <td *ngFor="let col of columns">
+
         <mat-slide-toggle *ngIf="isSliderToggle(col)" [checked]="isChecked(rowData)"
         (change)="onToggleChange($event,rowData)" [(ngModel)]="rowData.checked"></mat-slide-toggle>
         <span *ngIf="!isDateType(col)">{{ rowData[col.field] }}</span>
         <span *ngIf="isDateType(col)">{{ rowData[col.field] | date: "MM/dd/yyyy" }}</span>
+
       </td>
+
+
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
     <div *ngIf="isAdd" style="text-align:left">
-      <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+      <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label={{addLabel}}></button>
+      <button *ngIf="updateModel" type="button" pButton icon="fa fa-plus" (click)="deleteData()" label="delete"></button>
     </div>
+
   </ng-template>
 </p-table>
 

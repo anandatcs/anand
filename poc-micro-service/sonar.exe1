@@ -1,0 +1,4 @@
+mvn sonar:sonar \
+  -Dsonar.projectKey=com.poc:poc-micro-service-1 \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=efceebf1598790c4eb1503e111456db217af3a48

@@ -18,4 +18,21 @@ export class DashboardService {
     return this.httpManager.get<User[]>(url);
   }
 
+  addUser(user: User): Promise<User> {
+    const url = environment.endpointUrl.user;
+    return this.httpManager.post<User>(url, user);
+  }
+
+  updateUser(user: User): Promise<User> {
+    const url = environment.endpointUrl.user;
+    return this.httpManager.put<User>(url, user);
+  }
+
+  deleteUser(user: User): Promise<User> {
+    const url = `${environment.endpointUrl.user}/${user.id}`;
+    return this.httpManager.delete(url);
+  }
+
+
+
 }

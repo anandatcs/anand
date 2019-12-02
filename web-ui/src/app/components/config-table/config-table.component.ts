@@ -1,5 +1,4 @@
-import { EventEmitter } from '@angular/core';
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {
   isStringType,
   isDateType,
@@ -32,7 +31,11 @@ export class ConfigTableComponent implements OnInit {
 
   displayDialog: boolean;
 
-  selModel: any;
+  selModel: any = {};
+
+  updateModel: any = null;
+
+  addLabel = 'Add';
 
   @Input()
   header = 'Config Data Table';
@@ -69,12 +72,18 @@ export class ConfigTableComponent implements OnInit {
    *
    */
   onRowSelect(event) {
-    this.selModel = JSON.parse(JSON.stringify(event.data));
+    this.updateModel = JSON.parse(JSON.stringify(event.data));
+
     this.displayDialog = false;
+    this.addLabel = 'Update';
+  }
+
+  onRowUnselect(event) {
+    this.updateModel = null;
+    this.addLabel = 'Add';
   }
 
   showDialogToAdd() {
-    this.selModel = {};
     this.cols.forEach(col => {
       this.selModel[col.field] = '';
     });
@@ -84,7 +93,7 @@ export class ConfigTableComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       cols: this.cols,
-      selModel: this.selModel,
+      selModel: this.updateModel || this.selModel,
       title: this.header,
     };
     const dialogRef: MatDialogRef<TableMdDialogComponent> = this.dialog.open(
@@ -93,7 +102,7 @@ export class ConfigTableComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
-        this.formDataSave.emit(data);
+        this.formDataSave.emit({action: this.addLabel, data});
       }
     });
   }
@@ -110,4 +119,11 @@ export class ConfigTableComponent implements OnInit {
     rowData.checked = rowData.status === 'ACTIVE';
     return rowData.status === 'ACTIVE';
   }
+
+  deleteData(): void {
+    this.formDataSave.emit({action: 'delete', data: this.updateModel});
+  }
+
+
+
 }

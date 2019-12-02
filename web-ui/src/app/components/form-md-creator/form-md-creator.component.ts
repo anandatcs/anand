@@ -32,7 +32,9 @@ export class FormMdCreatorComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cols = this.cols.filter(col => col.formAdd !== false);
+  }
 
   public isDateType(col: any): boolean {
     return isDateType(col);

@@ -1,7 +1,7 @@
+import { DashboardService } from './../../services/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 import { USER_COLS } from '../../constants/index';
 import { User } from '../../models/user';
-import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard-user',
@@ -39,7 +39,42 @@ export class UserComponent implements OnInit {
 
   onFormDataSave(event): void {
     console.log(event);
+    const type = event.action;
+    // tslint:disable-next-line: variable-name
+    this.doOperation(event).then(_data => {
+      this.getUsers();
+    });
   }
+
+  doOperation(event): Promise<any> {
+    const type = event.action;
+    // tslint:disable-next-line: no-shadowed-variable
+    return new Promise( resolve => {
+      switch (type) {
+        case 'Add' :
+          delete event.data.id;
+          this._dashboardservice.addUser(event.data).then(data => {
+            resolve(data);
+          });
+          break;
+        case 'Update' :
+              this._dashboardservice.updateUser(event.data).then(data => {
+                resolve(data);
+              });
+              break;
+        case 'delete' :
+            this._dashboardservice.deleteUser(event.data).then(data => {
+              console.log("data deleteddd");
+              resolve(data);
+            });
+            break;
+         case '':
+           resolve({});
+           break;
+      }
+    });
+  }
+
 
 
 }

@@ -1,7 +1,6 @@
 export const USER_COLS = [
-  { field: 'id', header: 'ID'  },
-  { field: 'username', header: 'USERNAME'  },
-  { field: 'salary', header: 'SALARY' },
-  { field: 'age', header: 'AGE' },
-
+  { field: 'id', placeholder: 'ID', header: 'ID' , formAdd: false  },
+  { field: 'username', placeholder: 'USERNAME', header: 'USERNAME'  },
+  { field: 'salary', placeholder: 'SALARY', header: 'SALARY' },
+  { field: 'age', placeholder: 'AGE', header: 'AGE' },
 ];

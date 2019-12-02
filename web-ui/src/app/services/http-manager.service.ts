@@ -54,6 +54,14 @@ export class HttpManagerService {
             .toPromise();
     }
 
+    put<T>(url: string, body: any, options?: HttpOptions): Promise<T> {
+      return this._http.put<T>(`${url}`, body, options)
+          .pipe(
+              catchError(this.handleError)
+          )
+          .toPromise();
+    }
+
     patchWithAuth<T>(url: string, body: any, options?: HttpOptions): Promise<T> {
         options = this.setAuthHeader(options);
 

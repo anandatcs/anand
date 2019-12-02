@@ -10,13 +10,35 @@ import javax.persistence.*;
 
 
 
-//@Data
+
 @Entity
 @Table(name = "tbl_user")
 public class User implements Serializable {
 
 	
 	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+	@Column
+    private String username;
+
+	@Column
+    @JsonIgnore
+    private String password;
+
+	@Column
+    private long salary;
+
+	@Column
+    private int age;
+
 	public long getId() {
 		return id;
 	}
@@ -61,27 +83,6 @@ public class User implements Serializable {
 		return serialVersionUID;
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-
-	@Column
-    private String username;
-
-	@Column
-    @JsonIgnore
-    private String password;
-
-	@Column
-    private long salary;
-
-	@Column
-    private int age;
-
+	
 }
 
