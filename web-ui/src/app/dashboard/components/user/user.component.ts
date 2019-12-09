@@ -38,7 +38,6 @@ export class UserComponent implements OnInit {
   }
 
   onFormDataSave(event): void {
-    console.log(event);
     const type = event.action;
     // tslint:disable-next-line: variable-name
     this.doOperation(event).then(_data => {
@@ -64,7 +63,6 @@ export class UserComponent implements OnInit {
               break;
         case 'delete' :
             this._dashboardservice.deleteUser(event.data).then(data => {
-              console.log("data deleteddd");
               resolve(data);
             });
             break;

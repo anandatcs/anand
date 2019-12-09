@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ag-sample-table",
+            "outputPath": "dist/web-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ag-sample-table:build"
+            "browserTarget": "web-ui:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ag-sample-table:build:production"
+              "browserTarget": "web-ui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ag-sample-table:build"
+            "browserTarget": "web-ui:build"
           }
         },
         "test": {
@@ -111,15 +111,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ag-sample-table:serve"
+            "devServerTarget": "web-ui:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ag-sample-table:serve:production"
+              "devServerTarget": "web-ui:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "ag-sample-table"
+  "defaultProject": "web-ui"
 }
